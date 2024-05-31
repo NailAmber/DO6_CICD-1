@@ -1,0 +1,52 @@
+stages:
+  - build
+  - linter
+  - test
+  - deploy
+
+Build:
+  stage: build
+  script:
+    - rm -rf artifacts
+    - mkdir artifacts
+    - (cd src/cat && make)
+    - (cd src/grep && make)
+    - cp src/cat/s21_cat src/grep/s21_grep artifacts
+  artifacts:
+    paths:
+      - artifacts
+    expire_in: 30 days
+  only:
+    - develop
+  after_script:
+    - bash notify.sh
+
+Linters:
+  stage: linter
+  script:
+    - cp materials/linters/.clang-format src/cat
+    - cp materials/linters/.clang-format src/grep
+    - clang-format -n -Werror src/cat/*.[ch]
+    - clang-format -n -Werror src/grep/*.[ch]
+    - rm -rf src/cat/.clang-format src/grep/.clang-format
+  only:
+    - develop
+  after_script:
+    - bash notify.sh
+
+Test:
+  stage: test
+  script:
+    - (cd src/cat && make test)
+    - (cd src/grep && make test)
+  only:
+    - develop
+  after_script:
+    - bash notify.sh
+
+Deploy:
+  stage: deploy
+  script:
+    - (cd part5 && bash copy.sh)
+  after_script:
+    - bash notify.sh
