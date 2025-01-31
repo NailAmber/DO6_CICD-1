@@ -1,5 +1,5 @@
 ﻿## Part 1. Setting up the **gitlab-runner**  
-- Утсановим gitlab-runner на Ubuntu 22.04:
+- Установим gitlab-runner на Ubuntu 22.04:
 	- `curl -L "https://packages.gitlab.com/install/repositories/runner/gitlab-runner/script.deb.sh" | sudo bash`
 	- `sudo apt-get install gitlab-runner`
 - Run **gitlab-runner** and register it for use in the current project (_DO6_CICD_).
