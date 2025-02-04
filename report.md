@@ -40,13 +40,13 @@
 	- ![](./images/4_2.JPG)
 ## Part 5. Deployment stage
 - Клонируем виртуальную машину
-- Настраиваем сеть
-- Переходим в юзера gitlab-runner `su gitlab-runner`
+- Настраиваем сеть (между двумя серверами)
+- Переходим в юзера gitlab-runner `su gitlab-runner` (На первом оригинальном сервере)
 - На нём генерируем ключ ssh `ssh-keygen`
-- Пробрасываем ключ серверу `ssh-copy-id nailambe@10.10.0.2`
-- Даём gitlab-runner больше прав `sudo usermod -aG sudo gitlab-runner`
-- На сервере даём права к директории /usr/local/bin `chmod 777 /usr/local/bin`
-- Настраиваем все файлы
+- Пробрасываем ключ второму серверу `ssh-copy-id nailambe@10.10.0.2`
+- Даём gitlab-runner больше прав `sudo usermod -aG sudo gitlab-runner` (На первом оригинальном сервере)
+- На втором сервере (склонированном) даём права к директории /usr/local/bin `chmod 777 /usr/local/bin`
+- Настраиваем все файлы (На первом оригинальном сервере)
   - ![](./images/5_1.JPG)
   - ![](./images/5_2.JPG)
   - ![](./images/5_3.JPG)
